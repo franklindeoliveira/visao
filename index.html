@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Visão</title>
+
+    <!-- Bootstrap -->
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body ng-app="app" ng-controller="VisaoController">
+    <h1>Visão</h1>
+    
+    <button type="button" class="btn btn-default" ng-click="adicionaTabela()">+ Tabela</button>
+    <table class="table table-hover table-bordered" ng-repeat="tabela in tabelas">
+        <thead ng-show="$index == 0">
+            <tr>
+                <th>Nome</th>
+                <th>Chave?</th>
+                <th>Tipo</th>
+                <th>Tamanho</th>
+                <th>Dec.</th>
+                <th>Origem Usuário</th>
+                <th>Ferramentas</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{tabela.nome}}</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>
+                    <button type="button" class="btn btn-default" ng-click="removeTabela(tabela)">
+                        - Tabela
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="adicionaTabela()">
+                        + Tabela
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="adicionaAtributo(tabela)">
+                        + Atributo
+                    </button>
+                </td>
+            </tr>
+            <tr ng-repeat="atributo in tabela.atributos">
+                <td><input type="text" value="{{atributo.nome}}"></td>
+                <td><input type="text" value="{{atributo.tipo}}"></td>
+                <td><input type="text" value="{{atributo.tamanho}}"></td>
+                <td>x</td>
+                <td>x</td>
+                <td>x</td>
+                <td>
+                    <p>
+                        <button type="button" class="btn btn-default" ng-click="adicionaFerramenta(atributo, tabela)">
+                            + Ferramenta
+                        </button>
+                    </p>
+                    <p ng-repeat="ferramenta in atributo.ferramentas">
+                        <button type="button" class="btn btn-default" ng-click="removeFerramenta(ferramenta, atributo, tabela)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        {{ferramenta.ferramenta.nome}}
+                    </p>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-default" ng-click="removeAtributo(atributo, tabela)">
+                        - Atributo
+                    </button>
+                    <button type="button" class="btn btn-default" ng-click="adicionaAtributo(tabela)">
+                        + Atributo
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="assets/angular.min.js"></script>
+    
+    <script src="assets/ui-bootstrap-tpls-1.2.4.min.js"></script>
+    
+    <!-- Modules -->
+    <script src="modules/App.js"></script>
+
+    <!-- Controllers -->
+    <script src="controllers/VisaoController.js"></script>
+    <script src="controllers/ModalController.js"></script>
+
+    <!-- Directives -->
+    <!-- <script src="directives/..."></script> -->
+
+    <!-- Services -->
+    <script src="services/AjaxService.js"></script>
+
+    <!-- Constants -->
+    <!-- <script src="constants/..."></script> -->
+</body>
+
+</html>
