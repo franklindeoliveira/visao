@@ -20,75 +20,78 @@
 </head>
 
 <body ng-app="app" ng-controller="VisaoController">
-    <h1>Visão</h1>
-    
-    <button type="button" class="btn btn-default" ng-click="adicionaTabela()">+ Tabela</button>
-    <table class="table table-hover table-bordered" ng-repeat="tabela in tabelas">
-        <thead ng-show="$index == 0">
-            <tr>
-                <th>Nome</th>
-                <th>Chave?</th>
-                <th>Tipo</th>
-                <th>Tamanho</th>
-                <th>Dec.</th>
-                <th>Origem Usuário</th>
-                <th>Ferramentas</th>
-                <th>Opções</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{tabela.nome}}</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>
-                    <button type="button" class="btn btn-default" ng-click="removeTabela(tabela)">
-                        - Tabela
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="adicionaTabela()">
-                        + Tabela
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="adicionaAtributo(tabela)">
-                        + Atributo
-                    </button>
-                </td>
-            </tr>
-            <tr ng-repeat="atributo in tabela.atributos">
-                <td><input type="text" value="{{atributo.nome}}"></td>
-                <td><input type="text" value="{{atributo.tipo}}"></td>
-                <td><input type="text" value="{{atributo.tamanho}}"></td>
-                <td>x</td>
-                <td>x</td>
-                <td>x</td>
-                <td>
-                    <p>
-                        <button type="button" class="btn btn-default" ng-click="adicionaFerramenta(atributo, tabela)">
-                            + Ferramenta
-                        </button>
-                    </p>
-                    <p ng-repeat="ferramenta in atributo.ferramentas">
-                        <button type="button" class="btn btn-default" ng-click="removeFerramenta(ferramenta, atributo, tabela)">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                        {{ferramenta.ferramenta.nome}}
-                    </p>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-default" ng-click="removeAtributo(atributo, tabela)">
-                        - Atributo
-                    </button>
-                    <button type="button" class="btn btn-default" ng-click="adicionaAtributo(tabela)">
-                        + Atributo
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <h1>Visão</h1>
 
+        <button type="button" class="btn btn-default" ng-click="adicionaTabela()">+ T</button>
+
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Chave?</th>
+                    <th>Tipo</th>
+                    <th>Tamanho</th>
+                    <th>Dec.</th>
+                    <th>Origem Usuário</th>
+                    <th>Ferramentas</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="tabela in tabelas">
+                <tr>
+                    <td>{{tabela.nome}}</td>
+                    <td colspan="5"></td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="adicionaFerramenta(atributo, tabela)">
+                            + F
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="removeTabela(tabela)">
+                            - T
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="adicionaTabela()">
+                            + T
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="adicionaAtributo(tabela)">
+                            + A
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-repeat="atributo in tabela.atributos">
+                    <td><input type="text" value="{{atributo.nome}}"></td>
+                    <td><input type="text" value="{{atributo.tipo}}"></td>
+                    <td><input type="text" value="{{atributo.tamanho}}"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p>
+                            <button type="button" class="btn btn-default" ng-click="abreModalFerramentas(atributo, tabela)">
+                                + F
+                            </button>
+                        </p>
+                        <p ng-repeat="ferramenta in atributo.ferramentas">
+                            <button type="button" class="btn btn-default" ng-click="removeFerramenta(ferramenta, atributo, tabela)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            {{ferramenta.ferramenta.nome}}
+                        </p>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-default" ng-click="removeAtributo(atributo, tabela)">
+                            - A
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="adicionaAtributo(tabela)">
+                            + A
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
     <script src="assets/angular.min.js"></script>
     
     <script src="assets/ui-bootstrap-tpls-1.2.4.min.js"></script>
